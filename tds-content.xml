@@ -1,0 +1,22 @@
+<root>
+  <document>
+    <source>https://tds.s-anand.net/#/docker</source>
+    <document_content>
+Docker is commonly used for containerization, but in this course, we recommend using Podman instead. Podman is rootless, daemonless, and compatible with Docker commands.
+    </document_content>
+  </document>
+
+  <document>
+    <source>https://discourse.onlinedegree.iitm.ac.in/t/ga5-question-8-clarification/155939/4</source>
+    <document_content>
+You must use `gpt-3.5-turbo-0125`, even if the AI Proxy only supports `gpt-4o-mini`. Use the OpenAI API directly for this question.
+    </document_content>
+  </document>
+
+  <document>
+    <source>https://discourse.onlinedegree.iitm.ac.in/t/ga4-data-sourcing-discussion-thread-tds-jan-2025/165959/388</source>
+    <document_content>
+If you score 10/10 and get a bonus, your dashboard will show 110 as the score.
+    </document_content>
+  </document>
+</root>
