@@ -7,6 +7,12 @@ import pytesseract
 from PIL import Image
 import base64
 import io
+import openai
+
+# Point to AI Proxy instead of OpenAI
+openai.api_base = "https://api.aipipe.ai/v1"
+openai.api_key = os.getenv("eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjI0ZjEwMDE3NDJAZHMuc3R1ZHkuaWl0bS5hYy5pbiJ9.5rO8gsnIcdWMA--5K0lD3mIgXQqeU5_yETNcJQi9eXo")  # You will set this env var
+
 
 # OPTIONAL: Set path to tesseract binary on Windows
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
@@ -85,6 +91,20 @@ async def answer_question(data: QARequest):
         }
 
     # 🔍 Fallback: Search course content
-    answer, links = search_content(question, docs)
-    return {"answer": answer, "links": links}
+    # Fallback: Try AI Proxy if no course match
+if answer.startswith("Sorry, I couldn't find"):
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",  # or whatever model AIPipe supports
+            messages=[
+                {"role": "system", "content": "You are a helpful teaching assistant for the Tools in Data Science course at IIT Madras."},
+                {"role": "user", "content": question}
+            ],
+            temperature=0.3
+        )
+        llm_answer = response.choices[0].message.content.strip()
+        return {"answer": llm_answer, "links": []}
+    except Exception as e:
+        return {"answer": "OpenAI Proxy request failed.", "links": []}
+
 
