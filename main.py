@@ -11,7 +11,8 @@ import openai
 
 # Configure AI Proxy (AIPipe)
 openai.api_base = "https://api.aipipe.ai/v1"
-openai.api_key = os.getenv("eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjI0ZjEwMDE3NDJAZHMuc3R1ZHkuaWl0bS5hYy5pbiJ9.5rO8gsnIcdWMA--5K0lD3mIgXQqeU5_yETNcJQi9eXo")
+openai.api_key = os.getenv("AI_PIPE_TOKEN")
+
 
 # Tesseract path (Windows only — skip if on Linux/Mac or already in PATH)
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
